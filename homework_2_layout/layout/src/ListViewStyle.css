@@ -1,0 +1,26 @@
+.card_wrapper-list{
+
+}
+
+.product_card-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.product_card-img-list{
+    width: 150px;
+    height: 150px;
+}
+
+.card_price-wrap-list{
+
+}
+
+.price-list{
+        
+}
+
+.product_button{
+
+}
