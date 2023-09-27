@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import styled from "styled-components"
+
 export type Root = {
     items : Root2[]
 }
@@ -79,25 +81,25 @@ export interface MainImage {
   full_width: any
 }
 
+
 export default function Listing({items}:Root){
- console.log()
-    return (
-        <>
-            {items?.map((elem,index) =>
+    return ( 
+        <div className="product_wrapper">
+            {items?.map((elem,index) => (elem.state === 'removed') ? false : 
             <div key={index} className="item-list">
                 <div className="item">
                     <div className="item-image">
                     <a href="https://www.etsy.com/listing/292754135/woodland-fairy">
-                        <img src={elem.MainImage.url_570xN}/>
+                        <img src={(elem.MainImage === undefined) ? false : elem.MainImage.url_570xN}/>
                     </a>
                     </div>
-                    <div className="item-details">
-                    <p className="item-title">Woodland Fairy</p>
-                    <p className="item-price">{elem.price}</p>
-                    <p className="item-quantity level-medium">12 left</p>
-                    </div>
+                <div className="item-details">
+                    <p className="item-title">{(elem.description === undefined) ? false : (elem.description.length > 50) ? elem.description.slice(0, 50) + '...' : elem.description}</p>
+                    <p className="item-price">{elem.currency_code + " " + elem.price}</p>
+                    <p className={`item-quantity level-${(elem.quantity <= 10)?'low': (elem.quantity <= 20)? 'medium' : 'high'}`}>{elem.quantity + " left"}</p>
+                </div>
                 </div>
             </div>)}
-        </>
+        </div>
     )
 }

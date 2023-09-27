@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.product_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-list{
+    width: 300px;
+    margin: 20px;
+    background-color: aliceblue;
+}
+
+.item-price{
+    font-weight: 900;
+    font-size: 25px;
+}
+
+.item-quantity{
+    display: block;
+    font-size: 20px;
+    width: 90px;
+    height: 30px;
+    color: #fff;
+    text-align: center;
+}
+
+.level-low{
+    background-color:red
+}
+
+.level-medium{
+    background-color:orange
+}
+
+.level-high{
+    background-color:green
+}
