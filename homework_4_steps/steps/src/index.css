@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -66,4 +70,46 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.steps_wrapper{
+  border: 3px solid black;
+  border-radius: 30px;;
+  padding: 20px;
+}
+
+.steps{
+  display: flex;
+  justify-content: space-between;
+}
+
+.output_steps{
+  display: flex;
+  align-items: center;
+  width: 50px;
+}
+
+.wrappers{
+  border: 3px solid black;
+  border-radius: 30px;;
+  padding: 20px;
+ 
+}
+
+.form_wrapper{
+  margin-bottom: 20px;
+}
+
+.input_wrapper{
+  display: flex;
+}
+
+.form-control{
+  padding: 20px;
+}
+
+.btn_wrapper{
+  align-items: center;
+  display: flex;
+  padding-top: 35px;
 }
