@@ -82,7 +82,7 @@ export default function FormView(){
                     <label className="label">
                         <span className="label-text">Дата (ДД.ММ.ГГГГ)</span>
                     </label>
-                    <input  onChange={handleChange} name="date" value={formValue.date} type="text" required placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                    <input onChange={handleChange} name="date" value={formValue.date} type="text" required placeholder="Type here" className="input input-bordered w-full max-w-xs" />
                 </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
