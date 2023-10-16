@@ -8,7 +8,7 @@ function Card({stateCard}:StateArr) {
         <>
             {stateCard?.map(elem=>{
                 <div key={elem.id} className="card">
-                    <div className="card_description">{elem.data}</div>                     
+                    <div className="card_description">{elem.content}</div>                     
                 </div> 
             })}
         </>

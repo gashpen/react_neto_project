@@ -1,32 +1,20 @@
 import { useRef, useState } from 'react'
 import './App.css'
-import ChangeColor from './ChangeColor'
+import Counter from './Counter'
 
 function App() {
 
-  const form = useRef(null);
-  const [color,newColor] = useState('#ffffff');
-
-  function inputChangeColor(){
-    if(!/^#[^а-яА-Я]*$/.test(color)){
-      
-      document.querySelector('body').style.backgroundColor = 'red'
-      newColor(undefined)
-    } 
-      newColor(form.current.value);
-      document.querySelector('body').style.backgroundColor = color;
-    
-    
-  }
+  const [count,setState] = useState(0)
 
   return (
     <>
-      <form action="">
-        <input onChange={inputChangeColor} type="text" ref={form}/>
-      </form>
-      <ChangeColor 
-      color={color}
-      />
+      <div>
+        <Counter
+        count={count}
+        onCountDown={()=>{setState(count - 1)}}
+        onCountUp={()=>{setState(count + 1)}}
+        />
+      </div>
     </>
   )
 }

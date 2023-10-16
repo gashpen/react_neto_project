@@ -8,9 +8,6 @@ function CrudForm() {
     interface Form{
       content:string;
     }
-    interface StateArr{
-      stateCard:{content:string,id:number};
-  }
     
     const [state,newState] = useState<any>();
     const [formValue,newFormValue] = useState<Form>(initialState);
@@ -26,9 +23,8 @@ function CrudForm() {
           console.error(error)
         });
     }
-    console.log(state)
   
-    useEffect(getNotes,[])
+    useEffect(getNotes,[]);
     
     const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
