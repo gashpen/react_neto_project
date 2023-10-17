@@ -1,6 +1,5 @@
-import { useState,useEffect } from "react";
+import { useState,useRef} from "react";
 import WatchButton from "./WatchButton";
-import moment from "moment";
 import 'moment-timezone';
 import WatchOutput from "./WatchOutput";
 import { nanoid } from "nanoid";
@@ -13,6 +12,8 @@ function WatchInput() {
         timeZone:string;
     }
 
+    const intervalRef = useRef();
+
     const [formValue, newFormValue] = useState<Form>({
         id:'',
         nameCity:'',
@@ -20,7 +21,6 @@ function WatchInput() {
     });
 
     const[submitFormValue,newSubmitFormValue] = useState([]);
-
     
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
@@ -44,13 +44,13 @@ function WatchInput() {
         });
     };
 
-   
+    const onClickRemove = (id:string) =>{
+        newSubmitFormValue(submitFormValue.filter((elem:any)=> elem.id != id));
+        
+        clearInterval(intervalRef.current);
+    };
 
-    // const onClickRemove = (id) =>{
-    //     newSteps(steps.filter((elem)=> elem.id != id));    
-    // }
-    
-    return ( 
+    return (
         <>
             <form onSubmit={(event)=>{onSubmitForm(event)}} id="watch" action="" className="form_input">
                 <input value={formValue.nameCity} onChange={(event)=>{onChangeHandler(event)}} name="nameCity" type="text" className="input" required/>
@@ -61,6 +61,9 @@ function WatchInput() {
             </form>
             <WatchOutput
             submitFormValue={submitFormValue}
+            onClickRemove={onClickRemove}
+            newSubmitFormValue={newSubmitFormValue}
+            intervalRef={intervalRef}
             />
         </>
     );

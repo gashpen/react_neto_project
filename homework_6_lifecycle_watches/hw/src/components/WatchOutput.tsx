@@ -9,14 +9,13 @@ interface Form{
     id:string;
 }
 
-function WatchOutput({submitFormValue}:Form) {
+function WatchOutput(props) {
 
-
-    const [watch,newWatch] = useState<string>('');
+    const [watch,newWatch] = useState<Array<string>>([props.submitFormValue]);
 
     useEffect(()=>{
 
-        submitFormValue?.forEach((elem:Form)=>{
+        props.submitFormValue?.forEach((elem:Form)=>{
             
           const timeInterval =  setInterval(()=>{
 
@@ -27,23 +26,28 @@ function WatchOutput({submitFormValue}:Form) {
                 const seconds = (timeToWatch.getSeconds()<=9)?`0`+timeToWatch.getSeconds():timeToWatch.getSeconds();
                 const time = `${hours}:${minutes}:${seconds}`;
 
-                newWatch(`time in ${elem.nameCity} now ${time}`);
-            },1000)  
+                newWatch(()=>[`time in ${elem.nameCity} now ${time}`]);
+            },1000)
+            props.intervalRef.current = timeInterval; 
         })
-    },[submitFormValue])
+    },[props.submitFormValue])
 
-
+    window.watch = watch
     return (
         <>
-            {submitFormValue?.map((elem:Form)=>{
-                <div>
+            {props.submitFormValue?.map((elem:Form)=>{
+                return(
                     <div className="watch_wrapper">
-                            <div id={elem.id} className="new_watch">
-                               {watch}
-                            </div>
-                        <button>delete</button>
+                        <div id={elem.id} className="new_watch">
+                            {watch.map(elem=>{
+                                return(
+                                    <div>{elem}</div>
+                                )
+                            })}
+                        </div>
+                        <button onClick={()=>{props.onClickRemove(elem.id)}}>delete</button>
                     </div>
-                </div>
+                )
             })}
         </>
     )

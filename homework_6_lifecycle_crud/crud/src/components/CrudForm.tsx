@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Card from './Card';
+import UpdateButton from './UpdateButton';
 
 function CrudForm() {
     const initialState = {
@@ -24,7 +25,7 @@ function CrudForm() {
         });
     }
   
-    useEffect(getNotes,[]);
+    useEffect(getNotes,[formValue]);
     
     const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
@@ -34,7 +35,7 @@ function CrudForm() {
     const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
   
-      fetch('http://localhost:7070/notes', {
+       fetch('http://localhost:7070/notes', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -56,15 +57,36 @@ function CrudForm() {
         newFormValue(initialState);
     }
 
+    const removeCard = (id) =>{
+  
+      newState(state.filter((elem)=>elem.id != id));
+
+        fetch(`http://localhost:7070/notes/${id}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log("Карточка успешно удалена.");
+          } else {
+            console.log("Ошибка при удалении карточки. Код статуса: " + response.status);
+          }
+        })
+        .catch(error => {
+          console.log("Ошибка:", error);
+        });
+    }
+
+
     return (
       <div className='crud'>
+        <UpdateButton getNotes={getNotes}/>
         <div className='form_wrapper'>
             <form className='form' onSubmit={(event)=>{handlerSubmit(event)}}>
                 <input value={formValue.content} name='content' onChange={(event)=>{handlerChange(event)}} type="text" />
                 <input type='submit' value="add"></input>
             </form>
         </div>
-        <Card stateCard={state}/>
+        <Card stateCard={state} removeCard={removeCard}/>
       </div>
     )
 }

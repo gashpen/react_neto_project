@@ -77,4 +77,10 @@ button:focus-visible {
 .crud{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.card{
+  display: flex;
+  justify-content: space-between;
 }

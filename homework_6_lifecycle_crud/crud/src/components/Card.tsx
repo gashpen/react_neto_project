@@ -2,14 +2,17 @@ interface StateArr{
     stateCard:{data:string,id:number};
 }
 
-function Card({stateCard}:StateArr) {
-    
+function Card(props) {
+
     return ( 
         <>
-            {stateCard?.map(elem=>{
-                <div key={elem.id} className="card">
-                    <div className="card_description">{elem.content}</div>                     
-                </div> 
+            {props.stateCard?.map(elem=>{
+                return (
+                    <div key={elem.id} className="card">
+                        <div className="card_description">{elem.content}</div>
+                        <button onClick={()=>{props.removeCard(elem.id)}} className="delete_button">x</button>                     
+                    </div>
+                )
             })}
         </>
      );
