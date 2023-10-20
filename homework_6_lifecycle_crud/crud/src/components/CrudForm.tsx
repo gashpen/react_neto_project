@@ -11,6 +11,7 @@ function CrudForm() {
     }
     
     const [state,newState] = useState<any>();
+    
     const [formValue,newFormValue] = useState<Form>(initialState);
   
     const getNotes = () =>{
