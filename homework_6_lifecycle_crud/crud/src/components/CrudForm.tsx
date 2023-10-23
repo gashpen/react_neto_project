@@ -7,13 +7,13 @@ function CrudForm() {
         content:'',
     }
     interface Form{
+      id?:number;
       content:string;
     }
     
-    const [state,newState] = useState<any>();
-    
+    const [state,newState] = useState([]);
     const [formValue,newFormValue] = useState<Form>(initialState);
-  
+    
     const getNotes = () =>{
   
         fetch('http://localhost:7070/notes')
@@ -33,7 +33,7 @@ function CrudForm() {
       newFormValue(newInput);
     }
   
-    const handlerSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlerSubmit = (event:React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
   
        fetch('http://localhost:7070/notes', {
@@ -41,7 +41,7 @@ function CrudForm() {
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify((formValue.content === '')?false:formValue)
+          body: JSON.stringify(formValue)
       })
       .then(function(response) {
           if (!response.ok) {
@@ -58,9 +58,9 @@ function CrudForm() {
         newFormValue(initialState);
     }
 
-    const removeCard = (id) =>{
+    const removeCard = (id:number) =>{
   
-      newState(state.filter((elem)=>elem.id != id));
+      newState(state.filter((elem:Form)=>elem.id != id));
 
         fetch(`http://localhost:7070/notes/${id}`, {
           method: 'DELETE'

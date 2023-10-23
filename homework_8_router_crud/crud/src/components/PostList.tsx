@@ -5,7 +5,6 @@ import CreatePost from "./CreatePost"
 const PostList = () =>{
 
     const [post,setPost] = useState()
-
     const getPost = () =>{
         fetch('http://localhost:7070/posts')
         .then((response)=>response.json())

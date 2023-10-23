@@ -1,5 +1,4 @@
 import NewPost from "./NewPost";
-
 const NewPostList = () =>{
     return (
         <>

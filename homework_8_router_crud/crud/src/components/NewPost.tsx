@@ -1,5 +1,5 @@
-import { Link,useNavigate } from "react-router-dom"
-import React, { ReactEventHandler, useState } from 'react';  
+import { useNavigate } from "react-router-dom"
+import React, { useState } from 'react';  
 
 const NewPost = () =>{
 
@@ -8,27 +8,25 @@ const NewPost = () =>{
     }
 
     interface Form{
-        content:string;
+        content:string | number | readonly string[] | undefined;
     }
-    const [submitFormValue,setFormValue] = useState([]);
+
     const [formValue,newFormValue] = useState<Form>(initilaState)
     const navigate = useNavigate();
-
-
-    const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+     
+    const handlerChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>{
         const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
         newFormValue(newInput);
     }
-    const handlerSubmit = async (event:React.ChangeEvent<HTMLInputElement>) =>{
-        event.preventDefault()
+    const handlerSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         navigate('/');
-        console.log(formValue)
         fetch('http://localhost:7070/posts',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify((formValue.content != '') ? false : formValue.content)
+            body:JSON.stringify((formValue.content === '') ? false : formValue),
         })
         .then(function(response) {
             if (!response.ok) {
@@ -44,14 +42,21 @@ const NewPost = () =>{
         });
         newFormValue(initilaState)
     }
+
+    const exitButtonHandler = ()=>{
+        localStorage.setItem("content",JSON.stringify(formValue.content));
+        newFormValue({content:JSON.parse(localStorage.getItem("content") || '{}')})
+        navigate("/");
+    }
  
     return (
         <>
             <div className="new_post">
                 <form onSubmit={(event)=>{handlerSubmit(event)}} className="form_post">
-                    <input onChange={(event)=>{handlerChange(event)}} name="content" value={formValue.content} type="text" className="input_post" />
+                    <textarea onChange={(event)=>{handlerChange(event)}} placeholder="Что у вас нового?" name="content" value={formValue.content} className="input_post" />
                     <button type="submit" className="input_submit">Опубликовать</button>
                 </form>
+                    <button onClick={()=>{exitButtonHandler()}} className="exit_button">x</button>
             </div>
         </>
     )
