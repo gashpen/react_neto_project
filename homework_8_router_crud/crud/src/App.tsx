@@ -1,17 +1,21 @@
 import './App.css'
-import PostList from './components/PostList'
+import './components/PostMain/PostMain.css'
+import './components/CreatedPost/CreatedPost.css'
+import PostList from './components/PostMain/PostList'
 import {Routes,Route} from 'react-router-dom' 
-import NewPostList from './components/NewPostList'
-import PostView from './components/PostView'
+import NewPost from './components/CreatedPost/NewPost'
+import PostView from './components/PostEditAndRemove/PostView'
+import EditPost from './components/PostEditAndRemove/EditPost'
 
 function App() {
 
   return (
     <>
       <Routes>
-        <Route path='/' element={<PostList/>}/>
-        <Route path='/post/new' element={<NewPostList/>}/>
-        <Route path={`posts/:id`} element={<PostView/>}/>
+        <Route path='*' element={<PostList/>}/>
+        <Route path='posts/new' element={<NewPost/>}/>
+        <Route path='posts/:id' element={<PostView/>}/>
+        <Route path='posts/:id/edit' element={<EditPost/>}/>
       </Routes>
     </>
   )

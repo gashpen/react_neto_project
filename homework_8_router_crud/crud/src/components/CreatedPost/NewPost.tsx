@@ -18,6 +18,7 @@ const NewPost = () =>{
         const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
         newFormValue(newInput);
     }
+
     const handlerSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         navigate('/');

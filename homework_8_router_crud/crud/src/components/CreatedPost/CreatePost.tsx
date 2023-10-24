@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const CreatePost = () =>{
     return(
         <>
-          <Link to='/post/new'>create</Link>  
+          <Link to='/posts/new'>create</Link>
         </>
     )
 }
