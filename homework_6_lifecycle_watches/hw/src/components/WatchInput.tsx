@@ -1,4 +1,4 @@
-import { useState,useRef} from "react";
+import { useState} from "react";
 import WatchButton from "./WatchButton";
 import 'moment-timezone';
 import WatchOutput from "./WatchOutput";
@@ -11,8 +11,6 @@ function WatchInput() {
         nameCity:string;
         timeZone:string;
     }
-
-    const intervalRef = useRef();
 
     const [formValue, newFormValue] = useState<Form>({
         id:'',
@@ -32,11 +30,11 @@ function WatchInput() {
         const newStep = {
             id:nanoid(),
             nameCity: formValue.nameCity,
-            timeZone: Number(formValue.timeZone) * 3600000
+            timeZone: Number(formValue.timeZone)
         }
 
         newSubmitFormValue((prev)=>[...prev, newStep]);
-
+        
         newFormValue({
             id:'',
             nameCity:'',
@@ -46,8 +44,6 @@ function WatchInput() {
 
     const onClickRemove = (id:string) =>{
         newSubmitFormValue(submitFormValue.filter((elem:any)=> elem.id != id));
-        
-        clearInterval(intervalRef.current);
     };
 
     return (
@@ -55,15 +51,12 @@ function WatchInput() {
             <form onSubmit={(event)=>{onSubmitForm(event)}} id="watch" action="" className="form_input">
                 <input value={formValue.nameCity} onChange={(event)=>{onChangeHandler(event)}} name="nameCity" type="text" className="input" required/>
                 <input value={formValue.timeZone} onChange={(event)=>{onChangeHandler(event)}} name="timeZone" type="text" className="input" required/>
-                <WatchButton
-                formValue={formValue}/>
-
+                <button className="button" form="watch">Go!</button>
             </form>
             <WatchOutput
             submitFormValue={submitFormValue}
             onClickRemove={onClickRemove}
             newSubmitFormValue={newSubmitFormValue}
-            intervalRef={intervalRef}
             />
         </>
     );

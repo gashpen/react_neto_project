@@ -1,49 +1,39 @@
 import moment from "moment";
 import 'moment-timezone';
 import { useEffect,useState } from "react";
-
+window.moment = moment
 interface Form{
+    onClickRemove: (elem:string)=>void;
     submitFormValue?:{nameCity:string,timeZone:number};
     nameCity:string;
     timeZone:number;
     id:string;
 }
 
-function WatchOutput(props) {
+function WatchOutput(props:Form) {
 
-    const [watch,newWatch] = useState<Array<string>>([props.submitFormValue]);
+    const [watch,newWatch] = useState<string>('');
 
     useEffect(()=>{
 
         props.submitFormValue?.forEach((elem:Form)=>{
             
           const timeInterval =  setInterval(()=>{
-
-                const timeNow = Date.parse(moment().format());
-                const timeToWatch = new Date(timeNow + elem.timeZone);
-                const hours = (timeToWatch.getHours()<=9)?`0`+timeToWatch.getHours():timeToWatch.getHours();
-                const minutes = (timeToWatch.getMinutes()<=9)?`0`+timeToWatch.getMinutes():timeToWatch.getMinutes();
-                const seconds = (timeToWatch.getSeconds()<=9)?`0`+timeToWatch.getSeconds():timeToWatch.getSeconds();
-                const time = `${hours}:${minutes}:${seconds}`;
-
-                newWatch(()=>[`time in ${elem.nameCity} now ${time}`]);
+                newWatch(moment().utcOffset(elem.timeZone).format("HH:mm:ss"));
             },1000)
-            props.intervalRef.current = timeInterval; 
+            return () => clearInterval(timeInterval)
         })
-    },[props.submitFormValue])
+       
+    },[props.submitFormValue, watch])
 
-    window.watch = watch
+
     return (
         <>
             {props.submitFormValue?.map((elem:Form)=>{
                 return(
-                    <div className="watch_wrapper">
+                    <div key={elem.id} className="watch_wrapper">
                         <div id={elem.id} className="new_watch">
-                            {watch.map(elem=>{
-                                return(
-                                    <div>{elem}</div>
-                                )
-                            })}
+                          {watch}
                         </div>
                         <button onClick={()=>{props.onClickRemove(elem.id)}}>delete</button>
                     </div>

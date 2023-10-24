@@ -1,22 +1,32 @@
-import { useRef, useState } from 'react'
-import './App.css'
-import Counter from './Counter'
+import React, { useState, useEffect } from 'react';
 
-function App() {
+function Clock() {
+  // Initialize the current time to the current date and time
+  const [time, setTime] = useState(new Date());
 
-  const [count,setState] = useState(0)
+  // Update the time every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
+
+  // Extract the hours, minutes, and seconds from the current time
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const seconds = time.getSeconds();
+  // Format the time as a string
+  const timeString = `${hours}:${minutes}:${seconds}`;
 
   return (
-    <>
-      <div>
-        <Counter
-        count={count}
-        onCountDown={()=>{setState(count - 1)}}
-        onCountUp={()=>{setState(count + 1)}}
-        />
-      </div>
-    </>
-  )
+    <div>
+      {/* Display the time string */}
+      <h1>{timeString}</h1>
+    </div>
+  );
 }
 
-export default App
+export default Clock;
