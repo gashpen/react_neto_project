@@ -2,3 +2,44 @@
     display: flex;
     justify-content: center;
 }
+
+.create_wrapper{
+    background-color: #eaeaea;
+    width: 8vw;
+    height: 3.5vw;
+    border-radius: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link{
+    text-decoration: none;
+    
+}
+
+.new_post{
+    display: flex;
+    justify-content: center;
+    background-color: #eaeaea;
+    min-height: 300px;
+    flex-direction: row-reverse;
+    width: 45vw;
+}
+
+.form_post{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #d4d4d4;
+    height: 5.3vh;
+    border-radius: 1.5vw;
+}
+
+.input{
+    width: 100%;
+    
+}
+.input_form{
+    border-radius: 3vw;
+}

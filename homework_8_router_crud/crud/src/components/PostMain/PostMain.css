@@ -1,4 +1,33 @@
 .crud {
     display: flex;
     justify-content: center;
+    background-color:#f1f1f1;
+    width: 45vw;
+    flex-direction: row-reverse;
+}
+
+.posts_wrapper{
+    width: 37vw;
+    min-height: 300px;
+    background-color: #eaeaea;
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.post{
+    background-color: #f1f1f1;
+    margin-top: 5px;
+}
+
+.post_content{
+    
+}
+.kitten_img{
+    background-image: url('https://img.freepik.com/free-photo/little-grey-kitten-with-blue-eyes-lies-on-the-grey-couch_8353-7261.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698019200&semt=ais');
+    width: 6vw;
+    height: 6vw;
+    border-radius: 50%;
+    background-size: 125px;
+    background-position: center;
 }

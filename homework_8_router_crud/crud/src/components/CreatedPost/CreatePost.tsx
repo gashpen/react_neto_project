@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const CreatePost = () =>{
     return(
         <>
-          <Link to='/posts/new'>create</Link>
+          <Link className="btn btn-ghost" to='/posts/new'>Написать...</Link>
         </>
     )
 }

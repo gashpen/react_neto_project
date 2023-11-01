@@ -6,6 +6,7 @@ import {Routes,Route} from 'react-router-dom'
 import NewPost from './components/CreatedPost/NewPost'
 import PostView from './components/PostEditAndRemove/PostView'
 import EditPost from './components/PostEditAndRemove/EditPost'
+import './font/MinecraftTen-VGORe.ttf'
 
 function App() {
 

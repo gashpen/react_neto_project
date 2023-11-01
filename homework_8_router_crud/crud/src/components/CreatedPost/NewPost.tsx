@@ -14,7 +14,7 @@ const NewPost = () =>{
     const [formValue,newFormValue] = useState<Form>(initilaState)
     const navigate = useNavigate();
      
-    const handlerChange = (event: React.ChangeEvent<HTMLTextAreaElement>) =>{
+    const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         const newInput = (data:Form) => ({...data, [event.target.name]: event.target.value});
         newFormValue(newInput);
     }
@@ -54,10 +54,10 @@ const NewPost = () =>{
         <>
             <div className="new_post">
                 <form onSubmit={(event)=>{handlerSubmit(event)}} className="form_post">
-                    <textarea onChange={(event)=>{handlerChange(event)}} placeholder="Что у вас нового?" name="content" value={formValue.content} className="input_post" />
-                    <button type="submit" className="input_submit">Опубликовать</button>
+                <input onChange={(event)=>{handlerChange(event)}} placeholder="Что у вас нового?" name="content" value={formValue.content} className="input rounded-2xl" />
+                    <button type="submit" className="btn btn-ghost rounded-2xl">Опубликовать</button>
                 </form>
-                    <button onClick={()=>{exitButtonHandler()}} className="exit_button">x</button>
+                    <button onClick={()=>{exitButtonHandler()}} className="btn btn-ghost rounded-2xl">x</button>
             </div>
         </>
     )

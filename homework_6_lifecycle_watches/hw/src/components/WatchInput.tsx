@@ -45,7 +45,7 @@ function WatchInput() {
     const onClickRemove = (id:string) =>{
         newSubmitFormValue(submitFormValue.filter((elem:any)=> elem.id != id));
     };
-
+    
     return (
         <>
             <form onSubmit={(event)=>{onSubmitForm(event)}} id="watch" action="" className="form_input">
