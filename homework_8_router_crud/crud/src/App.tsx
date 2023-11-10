@@ -1,6 +1,7 @@
 import './App.css'
 import './components/PostMain/PostMain.css'
 import './components/CreatedPost/CreatedPost.css'
+import './components/PostEditAndRemove/EditPost.css'
 import PostList from './components/PostMain/PostList'
 import {Routes,Route} from 'react-router-dom' 
 import NewPost from './components/CreatedPost/NewPost'

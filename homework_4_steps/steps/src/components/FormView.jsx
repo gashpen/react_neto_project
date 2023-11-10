@@ -12,7 +12,7 @@ export default function FormView(){
 
     const [formValue,newFormValue] = useState(initialFormState);
 
-    const [steps, newSteps] = useState([]);
+    const [steps,newSteps] = useState([]);
 
     const [alert,newAlert] = useState('');
 

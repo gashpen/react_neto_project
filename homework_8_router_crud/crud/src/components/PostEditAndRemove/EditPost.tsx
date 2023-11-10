@@ -52,12 +52,13 @@ const EditPost = () =>{
     }
 
     return (
-        <>
+        <>  
+            <div className="content_wrapper">
             <form className="form form_edit">
                 <textarea className="textarea input_edit" name='content' value={formValue.content} onChange={(event)=>{changeHandler(event)}}></textarea>
-                <input className="input input_edit" onClick={(event)=>{submitHandler(event)}} type="submit"/>
+                <button className="btn btn-ghost" onClick={(event)=>{submitHandler(event)}} type="submit">Редактировать</button>
             </form>
-
+            </div>
         </>
     )
 }

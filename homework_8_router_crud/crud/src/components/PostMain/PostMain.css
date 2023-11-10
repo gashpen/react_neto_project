@@ -2,14 +2,14 @@
     display: flex;
     justify-content: center;
     background-color:#f1f1f1;
-    width: 45vw;
+    width: 47vw;
     flex-direction: row-reverse;
+    padding: 5px;
 }
 
 .posts_wrapper{
     width: 37vw;
     min-height: 300px;
-    background-color: #eaeaea;
     border-radius: 1vw;
     display: flex;
     flex-direction: column;
@@ -20,9 +20,18 @@
     margin-top: 5px;
 }
 
-.post_content{
-    
+.post_content-wrapper{
+    display: flex;
 }
+
+.post_content{
+    word-wrap: break-word;
+    width: 100%;
+    padding: 15px;
+    background-color: #d8d8d8;
+    margin-right: 5px;
+}
+
 .kitten_img{
     background-image: url('https://img.freepik.com/free-photo/little-grey-kitten-with-blue-eyes-lies-on-the-grey-couch_8353-7261.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698019200&semt=ais');
     width: 6vw;
@@ -30,4 +39,14 @@
     border-radius: 50%;
     background-size: 125px;
     background-position: center;
+}
+
+.created_time{
+    margin: 1px;
+    font-size: 12px;
+}
+
+.kitten_img_wrapper{
+    display: flex;
+    flex-direction: column;
 }
