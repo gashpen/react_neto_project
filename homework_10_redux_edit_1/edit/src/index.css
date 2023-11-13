@@ -67,22 +67,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-.product_wrapper{
-  display: flex;
-  justify-content: center;
-}
-
-.name{
-  display: flex;
-  align-items: center;
-  margin-right: 30px;
-}
-.price{
-  display: flex;
-  align-items: center;
-}
-
-.form_wrapper{
-
-}

@@ -1,4 +1,4 @@
-interface Form{
+interface FormInterface{
     id?:string;
     name:string;
     price:string;
@@ -8,4 +8,4 @@ interface Form{
     }
 }
 
-export default Form
+export default FormInterface;

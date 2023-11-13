@@ -1,10 +1,11 @@
 import './App.css'
-import Input from './components/Input'
+import Form from './component/Form'
+
 function App() {
 
   return (
     <>
-      <Input/>
+      <Form/>
     </>
   )
 }
