@@ -12,7 +12,7 @@ const Output = (props) => {
                     <div className="name">{elem.name}</div>
                     <div className="price">{elem.price}</div>
                     <Remove id={elem.id} cancel={props.cancel}/>
-                    <button className="edit" onClick={()=>props.onClickEdit(props.id)}>Edit</button>
+                    <button className="edit" onClick={()=>props.onClickEdit(elem.id)}>Edit</button>
                     {/* <Edit id={elem.id}/> */}
                     </div>
                 ) 
