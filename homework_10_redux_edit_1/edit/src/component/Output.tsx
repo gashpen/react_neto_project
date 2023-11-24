@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
 import Remove from "./Remove";
-import Edit from "./Edit";
+
 const Output = (props) => {
     const product = useSelector((store)=> store.productAdd.product);
+    const filtredProd = useSelector((store)=>store.productAdd.filtredProduct)
 
-    return ( 
-        <div>
-            {product.map(elem=>{
+    if(filtredProd.length > 0){
+        return (
+            <>
+                {filtredProd.map(elem=>{
                 return(
                     <div key={elem.id} className="product_wrapper">
                     <div className="name">{elem.name}</div>
@@ -15,11 +17,28 @@ const Output = (props) => {
                     <button className="edit" onClick={()=>props.onClickEdit(elem.id)}>Edit</button>
                     {/* <Edit id={elem.id}/> */}
                     </div>
-                ) 
+                )
             })}
-
-        </div> 
-    );
+            </>
+        )
+    } else {
+        return ( 
+            <div>
+                {product.map(elem=>{
+                    return(
+                        <div key={elem.id} className="product_wrapper">
+                        <div className="name">{elem.name}</div>
+                        <div className="price">{elem.price}</div>
+                        <Remove id={elem.id} cancel={props.cancel}/>
+                        <button className="edit" onClick={()=>props.onClickEdit(elem.id)}>Edit</button>
+                        {/* <Edit id={elem.id}/> */}
+                        </div>
+                    )
+                })}
+    
+            </div> 
+        );
+    }
 }
  
 export default Output;

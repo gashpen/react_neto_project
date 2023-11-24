@@ -14,38 +14,35 @@ const Form = () =>{
     }
     const product = useSelector((store)=>store.productAdd.product);
     const dispatch = useDispatch();
+
     const [inputValue,setInputValue] = useState<FormInterface>(initialState);
     const [cancel, setCancel] = useState<boolean>(false);
-    const [searchProduct,setSearchProduct] = useState('')
-    console.log(product)
+    const [searchProduct,setSearchProduct] = useState('');
+    
     const changeHandler = (event:ChangeEvent<HTMLInputElement>) =>{
         const newInput = (data:FormInterface) => ({...data, [event.target.name]: event.target.value});
         setInputValue(newInput);
     }
-
+    
     const submitHandler = (event:FormEvent<HTMLFormElement>) =>{
         event.preventDefault();
         dispatch({type:'product/ProductAdd',payload:{
             id:inputValue.id === '' ? nanoid() : inputValue.id,
             name:inputValue.name,
-            price:inputValue.price
+            price:inputValue.price,
         }})
-    
         setInputValue(initialState);
         setCancel(false)
     }
 
     const filterProduct = (event) =>{
-        if(!event){
-            return product
-        }
         dispatch({type:'product/ProductFilter',payload:event})
     }
 
     useEffect(()=>{
         const debounce = setTimeout(()=>{
             filterProduct(searchProduct)
-        },300)
+        },500)
         return ()=> clearTimeout(debounce)
     },[searchProduct])
 
@@ -59,24 +56,23 @@ const Form = () =>{
     }
 
     const onClickEdit = (id: string) =>{
-        product.map((elem)=>{
-             if(id === elem.id){
-                 setInputValue(
-                    {   
-                        id:elem.id,
-                        name:elem.name,
-                        price:elem.price    
-                    }
-                )
-                dispatch({type:'product/ProductEdit',
-                    payload:{
-                        id:elem.id,
-                        name:elem.name,
-                        price:elem.price
-                }})
+        
+        product.forEach(elem => {
+            dispatch({type:'product/ProductEdit',payload:{
+                id:elem.id,
+                name:elem.name,
+                price:elem.price 
+            }})
+            if(id === elem.id){
+                setInputValue({   
+                    id:elem.id,
+                    name:elem.name,
+                    price:elem.price    
+                })
             }
-            return elem
-        })
+            return elem    
+        });
+        
         setCancel(true);
     }
     return (
