@@ -14,11 +14,10 @@ const Form = () =>{
     }
     const product = useSelector((store)=>store.productAdd.product);
     const dispatch = useDispatch();
-
     const [inputValue,setInputValue] = useState<FormInterface>(initialState);
     const [cancel, setCancel] = useState<boolean>(false);
     const [searchProduct,setSearchProduct] = useState('');
-    
+    console.log(product)
     const changeHandler = (event:ChangeEvent<HTMLInputElement>) =>{
         const newInput = (data:FormInterface) => ({...data, [event.target.name]: event.target.value});
         setInputValue(newInput);
@@ -35,7 +34,7 @@ const Form = () =>{
         setCancel(false)
     }
 
-    const filterProduct = (event) =>{
+    const filterProduct = (event: string) =>{
         dispatch({type:'product/ProductFilter',payload:event})
     }
 
@@ -57,12 +56,14 @@ const Form = () =>{
 
     const onClickEdit = (id: string) =>{
         
-        product.forEach(elem => {
-            dispatch({type:'product/ProductEdit',payload:{
-                id:elem.id,
-                name:elem.name,
-                price:elem.price 
-            }})
+        product.forEach((elem: { id: string; name: string; price: string; }) => {
+            if(id === elem.id){
+                dispatch({type:'product/ProductEdit',payload:{
+                    id:elem.id,
+                    name:elem.name,
+                    price:elem.price 
+                }})
+            }
             if(id === elem.id){
                 setInputValue({   
                     id:elem.id,
@@ -72,7 +73,6 @@ const Form = () =>{
             }
             return elem    
         });
-        
         setCancel(true);
     }
     return (

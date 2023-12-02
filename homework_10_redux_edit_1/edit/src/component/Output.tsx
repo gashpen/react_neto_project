@@ -7,7 +7,7 @@ const Output = (props) => {
 
     if(filtredProd.length > 0){
         return (
-            <>
+            <div>
                 {filtredProd.map(elem=>{
                 return(
                     <div key={elem.id} className="product_wrapper">
@@ -15,11 +15,10 @@ const Output = (props) => {
                     <div className="price">{elem.price}</div>
                     <Remove id={elem.id} cancel={props.cancel}/>
                     <button className="edit" onClick={()=>props.onClickEdit(elem.id)}>Edit</button>
-                    {/* <Edit id={elem.id}/> */}
                     </div>
                 )
             })}
-            </>
+            </div>
         )
     } else {
         return ( 
@@ -31,7 +30,6 @@ const Output = (props) => {
                         <div className="price">{elem.price}</div>
                         <Remove id={elem.id} cancel={props.cancel}/>
                         <button className="edit" onClick={()=>props.onClickEdit(elem.id)}>Edit</button>
-                        {/* <Edit id={elem.id}/> */}
                         </div>
                     )
                 })}

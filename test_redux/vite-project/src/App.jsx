@@ -1,30 +1,18 @@
 import './App.css'
-import legacy_createStore from 'redux'
-
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-
-
-  const defaultState = {
-    cash:0,
-  }
-  
-  const reducer = (state,action) => {
-    switch (action.type) {
-      case 'ADD_CASH':
-        return {...state, cash: state.cash + action.payload}
-      case 'GET_CASH':
-        return {...state, cash: state.cash - action.payload}
-      default:
-        return state
-    }
-  }
-  
-  const store = legacy_createStore(reducer);
-
+  const product = useSelector((store)=>store.productAdd.product);
+    const dispatch = useDispatch();
+    const mockProducts = [
+      { id: '1', name: 'Продукт 1', price: '100' },
+      { id: '2', name: 'Продукт 2', price: '200' },
+      // ... другие продукты
+    ];
   
   return (
     <>
+
     </>
   )
 }

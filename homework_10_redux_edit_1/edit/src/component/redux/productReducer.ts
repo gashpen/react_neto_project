@@ -12,27 +12,20 @@ const productReducer = (state = initialState, action) =>{
                 product:[...state.product,action.payload]
             }
         case 'product/ProductRemove':
+     
             return {
                 ...state,
                 product:state.product.filter(elem => elem.id != action.payload),
             }
         case 'product/ProductEdit':
+
             return {
                 ...state,
-                product: state.product.map(elem => {
-                    if (elem.id === action.payload.id) {
-                        return {
-                            ...elem,
-                            id:action.payload.id,
-                            name: action.payload.name,
-                            price: action.payload.price
-                        };
-                    }
-                    return elem;
-                })
+                product:  state.product.map(elem => elem.id === action.payload.id ?
+                    Object.assign({}, elem, action.payload) : elem )
             };
         case 'product/ProductFilter':
-            console.log(state.filtredProduct)
+            
             return {
                 ...state,
                 filtredProduct:state.product.filter((elem)=> {
