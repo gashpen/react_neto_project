@@ -13,7 +13,7 @@ const Remove = (props) => {
     }
     return ( 
         <>
-            <button className="remove" onClick={()=>onClickRemove(props.id)}>x</button>
+            <button className="container-btn remove" onClick={()=>onClickRemove(props.id)}></button>
         </>
     );
 }

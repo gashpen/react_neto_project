@@ -19,9 +19,18 @@ const productReducer = (state = initialState, action) =>{
         case 'product/ProductEdit':
             return {
                 ...state,
-                product:  state.product.map(elem => elem.id === action.payload.id ?
-                    Object.assign({}, elem, action.payload) : elem )
-            };
+                product: state.product.map(elem =>{
+                    if(elem.id === action.payload.id){
+                            return {
+                                ...elem,
+                                id: action.payload.id,
+                                name:action.payload.name,
+                                price:action.payload.price
+                            }
+                        }
+                        return elem
+                    }),
+                }
         case 'product/ProductFilter':
             return {
                 ...state,

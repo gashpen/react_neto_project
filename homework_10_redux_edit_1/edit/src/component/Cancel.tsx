@@ -1,7 +1,8 @@
 const Cancel = (props) => {
     return ( 
         <>
-        <button onClick={()=>{props.onClickReset()}} type="reset">Cancel!</button></>
+            <button className="input_submit cancel" onClick={()=>{props.onClickReset()}} type="reset"></button>
+        </>
      );
 }
  
