@@ -4,13 +4,13 @@ import Remove from "./Remove";
 const Output = (props) => {
     const product = useSelector((store)=> store.productAdd.product);
     const filtredProd = useSelector((store)=>store.productAdd.filtredProduct)
-
+    console.log(product)
     if(filtredProd.length > 0){
         return (
             <div>
-                {filtredProd.map(elem=>{
+                {filtredProd.map((elem, index)=>{
                 return(
-                    <div key={elem.id} className="product_wrapper">
+                    <div key={index} className="product_wrapper">
                     <div className="name">{elem.name}</div>
                     <div className="price">{elem.price}</div>
                     <Remove id={elem.id} cancel={props.cancel}/>
@@ -23,9 +23,9 @@ const Output = (props) => {
     } else {
         return ( 
             <div>
-                {product.map(elem=>{
+                {product.map((elem, index)=>{
                     return(
-                        <div key={elem.id} className="product_wrapper">
+                        <div key={index} className="product_wrapper">
                         <div className="name">{elem.name}</div>
                         <div className="price">{elem.price}</div>
                         <Remove id={elem.id} cancel={props.cancel}/>

@@ -12,12 +12,13 @@ const Form = () =>{
         name:'',
         price:''
     }
+
     const product = useSelector((store)=>store.productAdd.product);
     const dispatch = useDispatch();
     const [inputValue,setInputValue] = useState<FormInterface>(initialState);
     const [cancel, setCancel] = useState<boolean>(false);
     const [searchProduct,setSearchProduct] = useState('');
-    console.log(product)
+
     const changeHandler = (event:ChangeEvent<HTMLInputElement>) =>{
         const newInput = (data:FormInterface) => ({...data, [event.target.name]: event.target.value});
         setInputValue(newInput);
@@ -55,26 +56,24 @@ const Form = () =>{
     }
 
     const onClickEdit = (id: string) =>{
-        
-        product.forEach((elem: { id: string; name: string; price: string; }) => {
-            if(id === elem.id){
-                dispatch({type:'product/ProductEdit',payload:{
-                    id:elem.id,
-                    name:elem.name,
-                    price:elem.price 
-                }})
-            }
-            if(id === elem.id){
-                setInputValue({   
-                    id:elem.id,
-                    name:elem.name,
-                    price:elem.price    
-                })
-            }
-            return elem    
-        });
+
+        const selectedProduct = product.find((elem: { id: string }) => elem.id === id);
+        if(selectedProduct){
+
+            dispatch({type:'product/ProductEdit',payload:{
+                id:selectedProduct.id,
+                name:selectedProduct.name,
+                price:selectedProduct.price 
+            }})
+        }
+        setInputValue({   
+            id:selectedProduct.id,
+            name:selectedProduct.name,
+            price:selectedProduct.price    
+        })
         setCancel(true);
     }
+
     return (
         <>
              <form onSubmit={(event)=>submitHandler(event)}>
