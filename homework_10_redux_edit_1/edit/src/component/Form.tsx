@@ -10,7 +10,7 @@ import save_img from "../assets/8666542_save_icon.png";
 const Form = () =>{
 
     const initialState = {
-        id:nanoid(),
+        id:'',
         name:'',
         price:''
     }
@@ -20,19 +20,25 @@ const Form = () =>{
     const [inputValue,setInputValue] = useState<FormInterface>(initialState);
     const [cancel, setCancel] = useState<boolean>(false);
     const [searchProduct,setSearchProduct] = useState('');
-    console.log(product)
+
     const changeHandler = (event:ChangeEvent<HTMLInputElement>) =>{
         const newInput = (data:FormInterface) => ({...data, [event.target.name]: event.target.value});
         setInputValue(newInput);
     }
-    
+    console.log(product)
     const submitHandler = (event:FormEvent<HTMLFormElement>) =>{
         event.preventDefault();
-        dispatch({type:'product/ProductAdd',payload:{
-            id:inputValue.id,
+        let type = 'product/ProductAdd';
+        const payload = {
+            id:nanoid(),
             name:inputValue.name,
             price:inputValue.price,
-        }})
+        };
+        if(inputValue.id){
+            type = 'product/ProductEdit';
+            payload.id = inputValue.id
+        }
+        dispatch({type, payload})
         setInputValue(initialState);
         setCancel(false)
     }
